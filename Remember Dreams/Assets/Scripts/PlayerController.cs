@@ -6,6 +6,8 @@ public class PlayerController : MonoBehaviour
 {
     public float velocity = 0.0f;
 
+    public float jump_force = 0.0f;
+
     private Rigidbody2D rigid_body;
 
     private SpriteRenderer sprite_renderer;
@@ -21,11 +23,6 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-    }
-
-    public void FixedUpdate()
-    {
         Vector2 curVel = rigid_body.velocity;
         curVel.x = Input.GetAxis("Horizontal") * velocity;
         rigid_body.velocity = curVel;
@@ -40,6 +37,16 @@ public class PlayerController : MonoBehaviour
             sprite_renderer.flipX = true;
         }
 
-        Debug.Log(rigid_body.velocity);
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            rigid_body.AddForce(Vector2.up * jump_force, ForceMode2D.Impulse);
+
+            Debug.Log("jaja hola");
+        }
+    }
+
+    public void FixedUpdate()
+    {
+
     }
 }
