@@ -8,10 +8,14 @@ public class PlayerController : MonoBehaviour
 
     private Rigidbody2D rigid_body;
 
+    private SpriteRenderer sprite_renderer;
+
     // Start is called before the first frame update
     void Start()
     {
-            rigid_body = GetComponent<Rigidbody2D>();
+        rigid_body = GetComponent<Rigidbody2D>();
+
+        sprite_renderer = GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
@@ -25,6 +29,16 @@ public class PlayerController : MonoBehaviour
         Vector2 curVel = rigid_body.velocity;
         curVel.x = Input.GetAxis("Horizontal") * velocity;
         rigid_body.velocity = curVel;
+
+        if (curVel.x > 0)
+        {
+            sprite_renderer.flipX = false;
+        }
+
+        if (curVel.x < 0)
+        {
+            sprite_renderer.flipX = true;
+        }
 
         Debug.Log(rigid_body.velocity);
     }
