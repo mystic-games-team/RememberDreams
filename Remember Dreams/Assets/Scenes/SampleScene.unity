@@ -176,7 +176,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   velocity: 6
   jump_force: 7
-  player_state: 0
+  player_state: 1
 --- !u!212 &325716834
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -493,7 +493,7 @@ SpriteRenderer:
   m_Size: {x: 3.7534883, y: 2.8325582}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &1087500179
@@ -615,6 +615,6 @@ SpriteRenderer:
   m_Size: {x: 3.7534883, y: 2.8325582}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0

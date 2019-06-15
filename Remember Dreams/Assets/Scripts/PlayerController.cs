@@ -6,10 +6,10 @@ public class PlayerController : MonoBehaviour
 {
     public enum PlayerStates
     {
-        IDLE,
-        WALK,
+        IDLE = 1,
+        WALK = 2,
 
-        NONE
+        NONE = -1
     }
 
 
@@ -32,7 +32,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-      
+        anim.SetInteger("State", (int)player_state);
     }
     private void FixedUpdate()
     {
