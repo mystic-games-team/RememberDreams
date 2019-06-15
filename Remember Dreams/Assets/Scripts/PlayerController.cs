@@ -32,6 +32,8 @@ public class PlayerController : MonoBehaviour
     private SpriteRenderer sprite_renderer;
     private PlayerInput player_input;
 
+    private float time_jump_start = 0.0F;
+
 
     // Start is called before the first frame update
     void Start()
@@ -74,6 +76,10 @@ public class PlayerController : MonoBehaviour
                 break;
             case PlayerStates.JUMPING:
                 Jump();
+                HoritzontalMovement();
+                break;
+            case PlayerStates.AIR:
+                HoritzontalMovement();
                 break;
             default:
                 break;
@@ -82,7 +88,7 @@ public class PlayerController : MonoBehaviour
 
     private void GetInput()
     {
-        player_input.jump = Input.GetKeyDown(KeyCode.Space);
+        player_input.jump = Input.GetKey(KeyCode.Space);
         player_input.move_x = Input.GetAxis("Horizontal");
     }
 
@@ -105,15 +111,30 @@ public class PlayerController : MonoBehaviour
         {
             case PlayerStates.IDLE:
                 if (player_input.jump)
+                {
                     player_state = PlayerStates.JUMPING;
+                    time_jump_start = Time.realtimeSinceStartup;
+                }
                 if (player_input.move_x != 0)
                     player_state = PlayerStates.WALK;
                 break;
             case PlayerStates.WALK:
                 if (player_input.jump)
+                {
                     player_state = PlayerStates.JUMPING;
+                    time_jump_start = Time.realtimeSinceStartup;
+                }
                 if (player_input.move_x == 0)
                     player_state = PlayerStates.IDLE;
+                break;
+            case PlayerStates.JUMPING:
+                if (!player_input.jump || time_jump_start < Time.realtimeSinceStartup - 0.3F)
+                {
+                    player_state = PlayerStates.AIR;
+                }
+                break;
+            case PlayerStates.AIR:
+               // player_state = PlayerStates.IDLE;
                 break;
             default:
                 break;
