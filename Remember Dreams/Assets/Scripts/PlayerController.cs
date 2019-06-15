@@ -25,14 +25,14 @@ public class PlayerController : MonoBehaviour
 
     public float velocity = 0.0f;
     public float jump_force = 0.0f;
-    public PlayerStates player_state = PlayerStates.NONE;
+    public PlayerStates player_state = PlayerStates.NONE; 
 
     private Rigidbody2D rigid_body;
     private Animator anim;
     private SpriteRenderer sprite_renderer;
-    private PlayerInput player_input;
+    private PlayerInput player_input; // variables de input en una struct
 
-    private float time_jump_start = 0.0F;
+    private float time_jump_start = 0.0F; // no he trobat cap timer, he trobat el mateix que SDL_GetTicks(), Time.realtimeSinceStartup
 
 
     // Start is called before the first frame update
@@ -62,7 +62,6 @@ public class PlayerController : MonoBehaviour
         GetInput();
         ChangeState();
         PerformActions();
-
     }
 
     private void PerformActions()
@@ -134,7 +133,7 @@ public class PlayerController : MonoBehaviour
                 }
                 break;
             case PlayerStates.AIR:
-               // player_state = PlayerStates.IDLE;
+               // TODO: Sha de detectar quan toques terra passar a IDLE
                 break;
             default:
                 break;
