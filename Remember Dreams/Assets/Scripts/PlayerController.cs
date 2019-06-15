@@ -4,24 +4,37 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public float velocity = 0.0f;
+    public enum PlayerStates
+    {
+        IDLE,
+        WALK,
 
+        NONE
+    }
+
+
+    public float velocity = 0.0f;
     public float jump_force = 0.0f;
+    public PlayerStates player_state = PlayerStates.NONE;
 
     private Rigidbody2D rigid_body;
-
+    private Animator anim;
     private SpriteRenderer sprite_renderer;
 
     // Start is called before the first frame update
     void Start()
     {
         rigid_body = GetComponent<Rigidbody2D>();
-
+        anim = GetComponent<Animator>();
         sprite_renderer = GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
     void Update()
+    {
+      
+    }
+    private void FixedUpdate()
     {
         Vector2 curVel = rigid_body.velocity;
         curVel.x = Input.GetAxis("Horizontal") * velocity;
@@ -43,10 +56,5 @@ public class PlayerController : MonoBehaviour
 
             Debug.Log("jaja hola");
         }
-    }
-
-    public void FixedUpdate()
-    {
-
     }
 }
