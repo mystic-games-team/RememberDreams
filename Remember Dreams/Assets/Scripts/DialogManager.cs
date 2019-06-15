@@ -44,21 +44,27 @@ public class DialogManager : MonoBehaviour
 
     public void StartDialog(DialogData data)
     {
+        // set struct
         dialog_data.dialog_panel = data.dialog_panel;
         dialog_data.dialog_node = data.dialog_node;
         dialog_data.portrait_npc = data.portrait_npc;
         dialog_data.actual_node = data.actual_node;
         dialog_data.interactive_target = data.interactive_target;
 
+        // always ui elemtns must have as a parent canvas
         dialog_data.dialog_panel.transform.SetParent(FindObjectOfType<Canvas>().transform, false);
         dialog_data.dialog_panel.transform.position = new Vector3(512, 99, dialog_data.dialog_panel.transform.position.z);
+
+        // set the npc portrait image
         dialog_data.dialog_panel.transform.Find("PortraitNPC").GetComponent<Image>().sprite = dialog_data.portrait_npc;
+
+        // set the first phrase
         dialog_data.dialog_panel.transform.Find("Text").GetComponent<Text>().text = dialog_data.actual_node.node_text[0];
+
+        // disable options
         dialog_data.dialog_panel.transform.Find("Option1").gameObject.SetActive(false);
         dialog_data.dialog_panel.transform.Find("Option2").gameObject.SetActive(false);
 
-        // dialog_data.dialog_panel.transform.Find("Option1").GetComponent<Button>().onClick.AddListener(PerformNextPhrase);
-        // dialog_data.dialog_panel.transform.Find("Option2").GetComponent<Button>().onClick.AddListener(delegate { Change("fdsf"); }); // per passar parametres
         active = true;
     }
     public void PerformNextPhrase()
@@ -74,12 +80,12 @@ public class DialogManager : MonoBehaviour
                     }
                     else // there's no more npc phrase in this node, player options appear
                     {
-                        GameObject obj1 = dialog_data.dialog_panel.transform.Find("Option1").gameObject;
+                        GameObject obj1 = dialog_data.dialog_panel.transform.Find("Option1").gameObject; 
                         obj1.SetActive(true);
                         obj1.GetComponent<Text>().text = dialog_data.actual_node.options[0].option_text;
                         obj1.GetComponent<Button>().onClick.AddListener(delegate { PerformFirstNodePhrase(dialog_data.actual_node.options[0].next_node); });
 
-                        if (dialog_data.actual_node.options.Count > 1)
+                        if (dialog_data.actual_node.options.Count > 1) // player has more than 1 option to talk
                         {
                         GameObject obj2 = dialog_data.dialog_panel.transform.Find("Option2").gameObject;
                         obj2.SetActive(true);
@@ -97,9 +103,9 @@ public class DialogManager : MonoBehaviour
             active = false;
             Destroy(dialog_data.dialog_panel);
         }
-        else
+        else // another node is called
         {
-            for (int i = 0; i < dialog_data.dialog_node.Count; ++i)
+            for (int i = 0; i < dialog_data.dialog_node.Count; ++i) // set the actual_node, must be the one that has the same id that the function has
             {
                 if (dialog_data.dialog_node[i].node_id == node)
                 {
@@ -107,8 +113,12 @@ public class DialogManager : MonoBehaviour
                     break;
                 }
             }
+
+            // disable option buttons
             dialog_data.dialog_panel.transform.Find("Option1").gameObject.SetActive(false);
             dialog_data.dialog_panel.transform.Find("Option2").gameObject.SetActive(false);
+
+            // set the first phrase of the node
             dialog_data.dialog_panel.transform.Find("Text").GetComponent<Text>().text = dialog_data.actual_node.node_text[0];
         }
         

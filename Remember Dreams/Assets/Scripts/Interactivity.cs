@@ -54,13 +54,14 @@ public class Interactivity : MonoBehaviour
 
     public void Update()
     {
-        if (interacting_state == InteractingStates.WAITING_INTERACTION)
+        if (interacting_state == InteractingStates.WAITING_INTERACTION) // player is in range to talk
         {
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (Input.GetKeyDown(KeyCode.Space)) // player begins talking
             {
                 interacting_state = InteractingStates.INTERACTING;
-                dialog_panel = Instantiate(copy_panel);
-
+                dialog_panel = Instantiate(copy_panel); // create the prefab of the dialog panel
+                
+                // set the dialog data and pass it to the dialog manager
                 DialogManager.DialogData data;
                 data.actual_node = actual_node;
                 data.dialog_node = dialog_node;
@@ -73,14 +74,14 @@ public class Interactivity : MonoBehaviour
     }
     public void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag == "Player")
+        if (collision.tag == "Player") // player in range now
         {
             interacting_state = InteractingStates.WAITING_INTERACTION;
         }
     }
     public void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.tag == "Player")
+        if (collision.tag == "Player") // player has left the range
         {
             interacting_state = InteractingStates.NO_RANGE_TO_INTERACT;
             if (dialog_panel != null)
