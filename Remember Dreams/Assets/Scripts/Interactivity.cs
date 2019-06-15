@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 public class Interactivity : MonoBehaviour
 {
-    enum InteractingStates
+    public enum InteractingStates
     {
         NO_RANGE_TO_INTERACT,
         WAITING_INTERACTION,
@@ -36,7 +36,7 @@ public class Interactivity : MonoBehaviour
 
     public GameObject dialog_panel;
     public DialogManager.DialogType dialog_type = DialogManager.DialogType.NONE;
-    private InteractingStates interacting_state = InteractingStates.NO_RANGE_TO_INTERACT;
+    public InteractingStates interacting_state = InteractingStates.NO_RANGE_TO_INTERACT;
 
     public Sprite portrait_npc;
     private GameObject copy_panel;
@@ -87,5 +87,9 @@ public class Interactivity : MonoBehaviour
             if (dialog_panel != null)
                 Destroy(dialog_panel);
         }
+    }
+    public void SetToWaitingInteraction()
+    {
+        interacting_state = InteractingStates.WAITING_INTERACTION;
     }
 }

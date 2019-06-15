@@ -35,7 +35,7 @@ public class DialogManager : MonoBehaviour
     {
         if (active)
         {
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (Input.GetKeyDown(KeyCode.Space) && !dialog_data.dialog_panel.transform.Find("Option1").gameObject.activeInHierarchy)
             {
                 PerformNextPhrase();
             }
@@ -101,6 +101,7 @@ public class DialogManager : MonoBehaviour
         if (node == 0) // conversation finished
         {
             active = false;
+            dialog_data.interactive_target.GetComponent<Interactivity>().Invoke("SetToWaitingInteraction", 0.2F);
             Destroy(dialog_data.dialog_panel);
         }
         else // another node is called
