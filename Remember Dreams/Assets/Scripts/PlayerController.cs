@@ -8,6 +8,8 @@ public class PlayerController : MonoBehaviour
     {
         IDLE = 1,
         WALK = 2,
+        JUMPING = 3,
+        AIR = 4,
 
         NONE = -1
     }
@@ -36,25 +38,56 @@ public class PlayerController : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        Vector2 curVel = rigid_body.velocity;
-        curVel.x = Input.GetAxis("Horizontal") * velocity;
-        rigid_body.velocity = curVel;
 
-        if (curVel.x > 0)
+
+        switch (player_state)
         {
-            sprite_renderer.flipX = false;
+            case PlayerStates.IDLE:
+            case PlayerStates.WALK:
+                HoritzontalMovement();
+                Jump();
+                break;
+            default:
+                break;
         }
 
-        if (curVel.x < 0)
-        {
-            sprite_renderer.flipX = true;
-        }
+       
+    }
 
+    private void Jump()
+    {
         if (Input.GetKeyDown(KeyCode.Space))
         {
             rigid_body.AddForce(Vector2.up * jump_force, ForceMode2D.Impulse);
+            player_state = PlayerStates.JUMPING;
+        }
+    }
 
-            Debug.Log("jaja hola");
+    private void HoritzontalMovement()
+    {
+        float h_axis = Input.GetAxis("Horizontal");
+        if (h_axis != 0)
+        {
+            Vector2 curVel = rigid_body.velocity;
+            curVel.x = h_axis * velocity;
+            rigid_body.velocity = curVel;
+
+            if (curVel.x > 0)
+            {
+                sprite_renderer.flipX = false;
+            }
+
+            if (curVel.x < 0)
+            {
+                sprite_renderer.flipX = true;
+            }
+            if (player_state != PlayerStates.JUMPING || player_state != PlayerStates.AIR)
+                player_state = PlayerStates.WALK;
+        }
+        else
+        {
+            if (player_state != PlayerStates.JUMPING || player_state != PlayerStates.AIR)
+                player_state = PlayerStates.IDLE;
         }
     }
 }
