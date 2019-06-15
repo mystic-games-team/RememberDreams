@@ -23,7 +23,7 @@ public class DialogManager : MonoBehaviour
 
     public DialogData dialog_data;
     public bool active = false;
-
+    private bool can_pass_dialog = true;
     // Start is called before the first frame update
     void Start()
     {
@@ -35,10 +35,16 @@ public class DialogManager : MonoBehaviour
     {
         if (active)
         {
-            if (Input.GetKeyDown(KeyCode.Space) && !dialog_data.dialog_panel.transform.Find("Option1").gameObject.activeInHierarchy)
+            if (can_pass_dialog)
             {
-                PerformNextPhrase();
+                if (Input.GetKeyDown(KeyCode.Space) && !dialog_data.dialog_panel.transform.Find("Option1").gameObject.activeInHierarchy)
+                {
+                    PerformNextPhrase();
+                }
             }
+            else
+                can_pass_dialog = true;
+            
         }
     }
 
@@ -119,6 +125,7 @@ public class DialogManager : MonoBehaviour
         }
         else // another node is called
         {
+            can_pass_dialog = false;
             for (int i = 0; i < dialog_data.dialog_node.Count; ++i) // set the actual_node, must be the one that has the same id that the function has
             {
                 if (dialog_data.dialog_node[i].node_id == node)
