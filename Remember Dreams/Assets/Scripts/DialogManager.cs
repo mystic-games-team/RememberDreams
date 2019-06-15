@@ -69,11 +69,11 @@ public class DialogManager : MonoBehaviour
     }
     public void PerformNextPhrase()
     {
-         for (int i = 0; i <= dialog_data.actual_node.node_text.Count - 1; ++i)
+         for (int i = 0; i <= dialog_data.actual_node.node_text.Count; ++i)
             {
                 if (dialog_data.actual_node.node_text[i] == dialog_data.dialog_panel.transform.Find("Text").GetComponent<Text>().text)
                 {
-                    if (i + 1 <= dialog_data.actual_node.node_text.Count - 1) // there's another phrase before player can talk
+                    if (i + 1 < dialog_data.actual_node.node_text.Count) // there's another phrase before player can talk
                     {
                         dialog_data.dialog_panel.transform.Find("Text").GetComponent<Text>().text = dialog_data.actual_node.node_text[i + 1];
                         break;
@@ -85,13 +85,23 @@ public class DialogManager : MonoBehaviour
                         obj1.GetComponent<Text>().text = dialog_data.actual_node.options[0].option_text;
                         obj1.GetComponent<Button>().onClick.AddListener(delegate { PerformFirstNodePhrase(dialog_data.actual_node.options[0].next_node); });
 
+                        
                         if (dialog_data.actual_node.options.Count > 1) // player has more than 1 option to talk
                         {
-                        GameObject obj2 = dialog_data.dialog_panel.transform.Find("Option2").gameObject;
-                        obj2.SetActive(true);
-                        obj2.GetComponent<Text>().text = dialog_data.actual_node.options[1].option_text;
-                        obj2.GetComponent<Button>().onClick.AddListener(delegate { PerformFirstNodePhrase(dialog_data.actual_node.options[1].next_node); }); // per passar parametres
+                            GameObject obj2 = dialog_data.dialog_panel.transform.Find("Option2").gameObject;
+                            obj2.SetActive(true);
+                            obj2.GetComponent<Text>().text = dialog_data.actual_node.options[1].option_text;
+                            obj2.GetComponent<Button>().onClick.AddListener(delegate { PerformFirstNodePhrase(dialog_data.actual_node.options[1].next_node); }); // per passar parametres
                         }
+                        if (dialog_data.actual_node.options[0].next_node == 0)
+                         {
+                        active = true;
+                        }
+                        if (dialog_data.actual_node.options[1].next_node == 0)
+                        {
+                            active = true;
+                        }
+                    break;
                 }
             }
         }
@@ -100,9 +110,12 @@ public class DialogManager : MonoBehaviour
     {
         if (node == 0) // conversation finished
         {
-            active = false;
-            dialog_data.interactive_target.GetComponent<Interactivity>().Invoke("SetToWaitingInteraction", 0.2F);
-            Destroy(dialog_data.dialog_panel);
+            if (dialog_data.dialog_panel.transform.Find("Option1").gameObject.activeInHierarchy)
+            {
+                active = false;
+                dialog_data.interactive_target.GetComponent<Interactivity>().Invoke("SetToWaitingInteraction", 0.2F);
+                Destroy(dialog_data.dialog_panel);
+            }
         }
         else // another node is called
         {
