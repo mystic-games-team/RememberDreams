@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.UIElements;
+
 
 
 public class Interactivity : MonoBehaviour
@@ -38,20 +38,21 @@ public class Interactivity : MonoBehaviour
     public DialogManager.DialogType dialog_type = DialogManager.DialogType.NONE;
     private InteractingStates interacting_state = InteractingStates.NO_RANGE_TO_INTERACT;
 
-    public Texture portrait_npc;
+    public Sprite portrait_npc;
     private GameObject copy_panel;
     [SerializeField]
     public List<DialogNodes> dialog_node = new List<DialogNodes>();
 
-   
+    private DialogNodes actual_node;
 
     // Start is called before the first frame update
-    void Start()
+    public void Start()
     {
         copy_panel = dialog_panel;
+        actual_node = dialog_node[0];
     }
 
-    private void Update()
+    public void Update()
     {
         if (interacting_state == InteractingStates.WAITING_INTERACTION)
         {
@@ -59,25 +60,25 @@ public class Interactivity : MonoBehaviour
             {
                 interacting_state = InteractingStates.INTERACTING;
                 dialog_panel = Instantiate(copy_panel);
-                dialog_panel.transform.SetParent(FindObjectOfType<Canvas>().transform, false);
-                dialog_panel.transform.position = new Vector3(512, 99, dialog_panel.transform.position.z);
-                dialog_panel.transform.Find("Text").GetComponent<Text>().text = dialog_node[0].node_text[0];
+
+                DialogManager.DialogData data;
+                data.actual_node = actual_node;
+                data.dialog_node = dialog_node;
+                data.dialog_panel = dialog_panel;
+                data.interactive_target = gameObject;
+                data.portrait_npc = portrait_npc;
+                GameObject.Find("DialogManager").SendMessage("StartDialog", data);
             }
         }
-        if (interacting_state == InteractingStates.INTERACTING)
-        {
-
-        }
     }
-
-    private void OnTriggerEnter2D(Collider2D collision)
+    public void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag == "Player")
         {
             interacting_state = InteractingStates.WAITING_INTERACTION;
         }
     }
-    private void OnTriggerExit2D(Collider2D collision)
+    public void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.tag == "Player")
         {
