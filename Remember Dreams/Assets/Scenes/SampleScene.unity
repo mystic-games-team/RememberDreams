@@ -717,6 +717,12 @@ PrefabInstance:
       propertyPath: dialog_node.Array.data[3].node_text.Array.data[4]
       value: terminavidas for evah
       objectReference: {fileID: 0}
+    - target: {fileID: 9039375392582498107, guid: 1260f7c9c25e64246aaf84867831c388,
+        type: 3}
+      propertyPath: portrait_npc
+      value: 
+      objectReference: {fileID: 21300000, guid: 9c0e99b02ceed2e4280d3223dc5aac95,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1260f7c9c25e64246aaf84867831c388, type: 3}
 --- !u!1 &1087500177

@@ -32,8 +32,6 @@ public class Interactivity : MonoBehaviour
         public bool safe_node;
     }
 
-    public GameObject display_text = null;
-
     public GameObject dialog_panel;
     public DialogManager.DialogType dialog_type = DialogManager.DialogType.NONE;
     public InteractingStates interacting_state = InteractingStates.NO_RANGE_TO_INTERACT;
