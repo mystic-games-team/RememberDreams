@@ -25,6 +25,10 @@ public class DialogManager : MonoBehaviour
     [HideInInspector]
     public bool active = false;
     private bool can_pass_dialog = true;
+
+    private bool phrase_completed = false;
+    private string hole_phrase;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -40,12 +44,18 @@ public class DialogManager : MonoBehaviour
             {
                 if (Input.GetKeyDown(KeyCode.Space) && !dialog_data.dialog_panel.transform.Find("Option1").gameObject.activeInHierarchy)
                 {
-                    PerformNextPhrase();
+                    if (phrase_completed)
+                        PerformNextPhrase();
+                    else
+                    {
+                        phrase_completed = true;
+                        StopCoroutine(WritePhrase(hole_phrase));
+                        dialog_data.dialog_panel.transform.Find("Text").GetComponent<Text>().text = hole_phrase;
+                    }
                 }
             }
             else
                 can_pass_dialog = true;
-            
         }
     }
 
@@ -66,7 +76,8 @@ public class DialogManager : MonoBehaviour
         dialog_data.dialog_panel.transform.Find("PortraitNPC").GetComponent<Image>().sprite = dialog_data.portrait_npc;
 
         // set the first phrase
-        dialog_data.dialog_panel.transform.Find("Text").GetComponent<Text>().text = dialog_data.actual_node.node_text[0];
+        //dialog_data.dialog_panel.transform.Find("Text").GetComponent<Text>().text = dialog_data.actual_node.node_text[0];
+        StartCoroutine(WritePhrase(dialog_data.actual_node.node_text[0]));
 
         // disable options
         dialog_data.dialog_panel.transform.Find("Option1").gameObject.SetActive(false);
@@ -82,7 +93,7 @@ public class DialogManager : MonoBehaviour
                 {
                     if (i + 1 < dialog_data.actual_node.node_text.Count) // there's another phrase before player can talk
                     {
-                        dialog_data.dialog_panel.transform.Find("Text").GetComponent<Text>().text = dialog_data.actual_node.node_text[i + 1];
+                        StartCoroutine(WritePhrase(dialog_data.actual_node.node_text[i + 1]));
                         break;
                     }
                     else // there's no more npc phrase in this node, player options appear
@@ -135,8 +146,22 @@ public class DialogManager : MonoBehaviour
             dialog_data.dialog_panel.transform.Find("Option2").gameObject.SetActive(false);
 
             // set the first phrase of the node
-            dialog_data.dialog_panel.transform.Find("Text").GetComponent<Text>().text = dialog_data.actual_node.node_text[0];
+            StartCoroutine(WritePhrase(dialog_data.actual_node.node_text[0]));
         }
         
+    }
+
+    IEnumerator WritePhrase(string text)
+    {
+        hole_phrase = text;
+        phrase_completed = false;
+        dialog_data.dialog_panel.transform.Find("Text").GetComponent<Text>().text = null;
+
+        for (int i = 0; dialog_data.dialog_panel.transform.Find("Text").GetComponent<Text>().text != text; ++i)
+        {
+            dialog_data.dialog_panel.transform.Find("Text").GetComponent<Text>().text += text[i];
+            yield return new WaitForSeconds(0.03F);
+        }
+        phrase_completed = true;
     }
 }
