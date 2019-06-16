@@ -47,7 +47,7 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         anim.SetInteger("State", (int)player_state);
-
+        Debug.Log((int)player_state);
         if (rigid_body.velocity.x > 0)
         {
             sprite_renderer.flipX = false;
@@ -109,20 +109,12 @@ public class PlayerController : MonoBehaviour
         switch (player_state)
         {
             case PlayerStates.IDLE:
-                if (player_input.jump)
-                {
-                    player_state = PlayerStates.JUMPING;
-                    time_jump_start = Time.realtimeSinceStartup;
-                }
+                CanJump();
                 if (player_input.move_x != 0)
                     player_state = PlayerStates.WALK;
                 break;
             case PlayerStates.WALK:
-                if (player_input.jump)
-                {
-                    player_state = PlayerStates.JUMPING;
-                    time_jump_start = Time.realtimeSinceStartup;
-                }
+                CanJump();
                 if (player_input.move_x == 0)
                     player_state = PlayerStates.IDLE;
                 break;
@@ -139,4 +131,15 @@ public class PlayerController : MonoBehaviour
                 break;
         }
     }
+
+    private void CanJump()
+    {
+        if (player_input.jump)
+        {
+            player_state = PlayerStates.JUMPING;
+            time_jump_start = Time.realtimeSinceStartup;
+        }
+    }
+
 }
+
