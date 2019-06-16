@@ -90,7 +90,7 @@ public class PlayerController : MonoBehaviour
     {
         player_input.jump = Input.GetKey(KeyCode.Space);
         player_input.move_x = Input.GetAxis("Horizontal");
-        player_input.attack = Input.GetKey(KeyCode.Z);
+        player_input.attack = Input.GetKeyDown(KeyCode.Z);
     }
 
     private void Jump()
@@ -139,7 +139,6 @@ public class PlayerController : MonoBehaviour
                // The logic is in DetectGround.cs
                 break;
             case PlayerStates.ATTACK:
-                
                 break;
             default:
                 break;

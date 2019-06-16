@@ -106,7 +106,7 @@ public class DialogManager : MonoBehaviour
                         //obj1.GetComponent<Button>().Select();
 
                         EventSystem.current.SetSelectedGameObject(obj1, null);
-
+                        can_pass_dialog = false;
                         if (dialog_data.actual_node.options.Count > 1) // player has more than 1 option to talk
                         {
                             GameObject obj2 = dialog_data.dialog_panel.transform.Find("Option2").gameObject;
@@ -121,6 +121,8 @@ public class DialogManager : MonoBehaviour
     }
     public void PerformFirstNodePhrase(int node)
     {
+        if (!can_pass_dialog)
+            return;
         if (node == 0) // conversation finished
         {
             if (dialog_data.dialog_panel.transform.Find("Option1").gameObject.activeInHierarchy)
