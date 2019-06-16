@@ -9,15 +9,17 @@ public class PlayerController : MonoBehaviour
     {
         public float move_x;
         public bool jump;
+        public bool attack;
     }
 
 
     public enum PlayerStates
     {
         IDLE = 1,
-        WALK = 2,
+        RUN = 2,
         JUMPING = 3,
         AIR = 4,
+        ATTACK=5,
 
         NONE = -1
     }
@@ -33,7 +35,6 @@ public class PlayerController : MonoBehaviour
     private PlayerInput player_input; // variables de input en una struct
 
     private float time_jump_start = 0.0F; // no he trobat cap timer, he trobat el mateix que SDL_GetTicks(), Time.realtimeSinceStartup
-
 
     // Start is called before the first frame update
     void Start()
@@ -70,7 +71,7 @@ public class PlayerController : MonoBehaviour
         {
             case PlayerStates.IDLE:
                 break;
-            case PlayerStates.WALK:
+            case PlayerStates.RUN:
                 HoritzontalMovement();
                 break;
             case PlayerStates.JUMPING:
@@ -89,11 +90,20 @@ public class PlayerController : MonoBehaviour
     {
         player_input.jump = Input.GetKey(KeyCode.Space);
         player_input.move_x = Input.GetAxis("Horizontal");
+        player_input.attack = Input.GetKey(KeyCode.Z);
     }
 
     private void Jump()
     {
         rigid_body.AddForce(Vector2.up * jump_force, ForceMode2D.Impulse);
+    }
+
+    private void Attack()
+    {
+        if(player_input.attack)
+        {
+            player_state = PlayerStates.ATTACK;
+        }
     }
 
     private void HoritzontalMovement()
@@ -103,18 +113,19 @@ public class PlayerController : MonoBehaviour
         rigid_body.velocity = curVel;
     }
 
-
     private void ChangeState()
     {
         switch (player_state)
         {
             case PlayerStates.IDLE:
                 CanJump();
+                Attack();
                 if (player_input.move_x != 0)
-                    player_state = PlayerStates.WALK;
+                    player_state = PlayerStates.RUN;
                 break;
-            case PlayerStates.WALK:
+            case PlayerStates.RUN:
                 CanJump();
+                Attack();
                 if (player_input.move_x == 0)
                     player_state = PlayerStates.IDLE;
                 break;
@@ -125,7 +136,10 @@ public class PlayerController : MonoBehaviour
                 }
                 break;
             case PlayerStates.AIR:
-               // TODO: Sha de detectar quan toques terra passar a IDLE
+               // The logic is in DetectGround.cs
+                break;
+            case PlayerStates.ATTACK:
+                
                 break;
             default:
                 break;
@@ -141,5 +155,9 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private void AttackFinished()
+    {
+        player_state = PlayerStates.IDLE;
+    }
 }
 
