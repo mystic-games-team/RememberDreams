@@ -50,7 +50,24 @@ public class Interactivity : MonoBehaviour
     public void Start()
     {
         copy_panel = dialog_panel;
-        actual_node = dialog_node[0];
+
+        int start_node = GameObject.Find("GameController").GetComponent<GameController>().SetNPCStartNode(dialog_type, dialog_node[0].node_id);
+
+        if (start_node != -1) // player has talked with that npc and has progressd the story
+        {
+            for (int i = 0;i<dialog_node.Count;++i)
+            {
+                if (dialog_node[i].node_id == start_node)
+                {
+                    actual_node = dialog_node[i];
+                    break;
+                }
+            }
+        }
+        else // first talking time or the npc has no interactivity 
+        {
+            actual_node = dialog_node[0];
+        }
     }
 
     public void Update()
@@ -89,8 +106,10 @@ public class Interactivity : MonoBehaviour
                 Destroy(dialog_panel);
         }
     }
+
     public void SetToWaitingInteraction()
     {
+        GameObject.Find("GameController").GetComponent<GameController>().SaveNPC(actual_node.node_id, dialog_type);
         interacting_state = InteractingStates.WAITING_INTERACTION;
     }
 }

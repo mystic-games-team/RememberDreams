@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 9039375392582498107}
   m_Layer: 0
   m_Name: InteractiveZone
-  m_TagString: Untagged
+  m_TagString: Interactive
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -75,6 +75,7 @@ MonoBehaviour:
   dialog_panel: {fileID: 4261267213533614340, guid: bdb4ae20001a21d4793abe236d935768,
     type: 3}
   dialog_type: 0
+  interacting_state: 0
   portrait_npc: {fileID: 0}
   dialog_node:
   - node_id: 1
@@ -86,13 +87,21 @@ MonoBehaviour:
       next_node: 2
     - option_text: Fuck you omg
       next_node: 3
+    safe_node: 0
   - node_id: 2
     node_text:
     - Oh, that's great!
     options: []
+    safe_node: 0
   - node_id: 3
     node_text:
     - Shut up retard
     options:
     - option_text: Bye...
       next_node: 0
+    safe_node: 0
+  actual_node:
+    node_id: 0
+    node_text: []
+    options: []
+    safe_node: 0
