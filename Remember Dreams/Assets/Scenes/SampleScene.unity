@@ -337,18 +337,21 @@ MonoBehaviour:
       next_node: 2
     - option_text: Fuck you omg
       next_node: 3
+    safe_node: 0
   - node_id: 2
     node_text:
     - Oh, that's great!
     options:
     - option_text: Love you
       next_node: 4
+    safe_node: 0
   - node_id: 3
     node_text:
     - Shut up retard
     options:
     - option_text: Bye...
       next_node: 0
+    safe_node: 1
   - node_id: 4
     node_text:
     - I faking love you
@@ -357,6 +360,7 @@ MonoBehaviour:
     options:
     - option_text: Amazing dialog
       next_node: 0
+    safe_node: 1
 --- !u!61 &361927706
 BoxCollider2D:
   m_ObjectHideFlags: 0

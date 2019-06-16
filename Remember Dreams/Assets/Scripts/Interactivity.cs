@@ -29,7 +29,7 @@ public class Interactivity : MonoBehaviour
         public int node_id;
         public List<string> node_text;
         public List<DialogOptions> options;
-
+        public bool safe_node;
     }
 
     public GameObject display_text = null;
@@ -43,7 +43,7 @@ public class Interactivity : MonoBehaviour
     [SerializeField]
     public List<DialogNodes> dialog_node = new List<DialogNodes>();
 
-    private DialogNodes actual_node;
+    public DialogNodes actual_node;
 
     // Start is called before the first frame update
     public void Start()

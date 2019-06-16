@@ -123,6 +123,8 @@ public class DialogManager : MonoBehaviour
                 if (dialog_data.dialog_node[i].node_id == node)
                 {
                     dialog_data.actual_node = dialog_data.dialog_node[i];
+                    if (dialog_data.actual_node.safe_node)
+                        dialog_data.interactive_target.GetComponent<Interactivity>().actual_node = dialog_data.actual_node;
                     break;
                 }
             }
