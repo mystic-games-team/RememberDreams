@@ -48,7 +48,7 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         anim.SetInteger("State", (int)player_state);
-        Debug.Log((int)player_state);
+
         if (rigid_body.velocity.x > 0.1F)
         {
             sprite_renderer.flipX = false;
@@ -91,7 +91,6 @@ public class PlayerController : MonoBehaviour
         player_input.jump = Input.GetButton("Jump");
         player_input.move_x = Input.GetAxis("Horizontal");
         player_input.attack = Input.GetButtonDown("Attack");
-
     }
 
     private void Jump()
