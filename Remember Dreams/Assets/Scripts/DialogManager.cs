@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class DialogManager : MonoBehaviour
 {
@@ -102,8 +103,10 @@ public class DialogManager : MonoBehaviour
                         obj1.SetActive(true);
                         obj1.GetComponent<Text>().text = dialog_data.actual_node.options[0].option_text;
                         obj1.GetComponent<Button>().onClick.AddListener(delegate { PerformFirstNodePhrase(dialog_data.actual_node.options[0].next_node); });
+                        //obj1.GetComponent<Button>().Select();
 
-                        
+                        EventSystem.current.SetSelectedGameObject(obj1, null);
+
                         if (dialog_data.actual_node.options.Count > 1) // player has more than 1 option to talk
                         {
                             GameObject obj2 = dialog_data.dialog_panel.transform.Find("Option2").gameObject;
