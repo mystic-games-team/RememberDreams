@@ -60,7 +60,7 @@ public class DialogManager : MonoBehaviour
 
         // always ui elemtns must have as a parent canvas
         dialog_data.dialog_panel.transform.SetParent(FindObjectOfType<Canvas>().transform, false);
-        dialog_data.dialog_panel.transform.position = new Vector3(0, 99, dialog_data.dialog_panel.transform.position.z);
+        dialog_data.dialog_panel.transform.position = new Vector3(271, 75, dialog_data.dialog_panel.transform.position.z);
 
         // set the npc portrait image
         dialog_data.dialog_panel.transform.Find("PortraitNPC").GetComponent<Image>().sprite = dialog_data.portrait_npc;
