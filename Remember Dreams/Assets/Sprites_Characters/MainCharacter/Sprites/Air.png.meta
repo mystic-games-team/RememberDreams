@@ -8,6 +8,15 @@ TextureImporter:
   - first:
       213: -3520625189988610332
     second: Anim_JUMP_12
+  - first:
+      213: 5419116483468064896
+    second: Anim_JUMP_13
+  - first:
+      213: -2351984204137251687
+    second: Anim_JUMP_14
+  - first:
+      213: -683645375958200611
+    second: Anim_JUMP_15
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -95,12 +104,12 @@ TextureImporter:
       name: Anim_JUMP_11
       rect:
         serializedVersion: 2
-        x: 191
-        y: 134
+        x: 598
+        y: 57
         width: 195
         height: 377
       alignment: 9
-      pivot: {x: 0.46153846, y: 0.2413793}
+      pivot: {x: 0.7974359, y: 0.2612732}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -116,12 +125,12 @@ TextureImporter:
       name: Anim_JUMP_12
       rect:
         serializedVersion: 2
-        x: 1
-        y: 100
+        x: 446
+        y: 41
         width: 188
         height: 411
       alignment: 9
-      pivot: {x: 0.4787234, y: 0.32846716}
+      pivot: {x: 0.82712764, y: 0.34671533}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -129,6 +138,69 @@ TextureImporter:
       bones: []
       spriteID: 
       internalID: -3520625189988610332
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Anim_JUMP_13
+      rect:
+        serializedVersion: 2
+        x: 298
+        y: 41
+        width: 191
+        height: 433
+      alignment: 9
+      pivot: {x: 0.78272253, y: 0.41224018}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 
+      internalID: 5419116483468064896
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Anim_JUMP_14
+      rect:
+        serializedVersion: 2
+        x: 156
+        y: 44
+        width: 197
+        height: 467
+      alignment: 9
+      pivot: {x: 0.75888324, y: 0.4914347}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 
+      internalID: -2351984204137251687
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Anim_JUMP_15
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 28
+        width: 203
+        height: 483
+      alignment: 9
+      pivot: {x: 0.726601, y: 0.5662526}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 
+      internalID: -683645375958200611
       vertices: []
       indices: 
       edges: []
