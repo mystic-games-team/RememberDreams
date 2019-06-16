@@ -2,11 +2,14 @@ version: 2
 importPivots: 1
 tpsheetFileNames:
 - Assets/codeandweb.com/Example/SpriteSheet/sprites.tpsheet
+- Assets/Sprites_Characters/MainCharacter/Sprites/Idle.tpsheet
 - Assets/Sprites_Characters/MainCharacter/Sprites/Run.tpsheet
 textureFileNames:
 - Assets/codeandweb.com/Example/SpriteSheet/sprites.png
+- Assets/Sprites_Characters/MainCharacter/Sprites/Idle.png
 - Assets/Sprites_Characters/MainCharacter/Sprites/Run.png
 normalmapFileNames:
 - Assets/codeandweb.com/Example/SpriteSheet/sprites_n.png
+- 
 - 
 enableDebugOutput: 0
