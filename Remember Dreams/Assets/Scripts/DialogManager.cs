@@ -84,6 +84,7 @@ public class DialogManager : MonoBehaviour
         dialog_data.dialog_panel.transform.Find("Option1").gameObject.SetActive(false);
         dialog_data.dialog_panel.transform.Find("Option2").gameObject.SetActive(false);
 
+        can_pass_dialog = false;
         active = true;
     }
     public void PerformNextPhrase()
