@@ -49,11 +49,11 @@ public class PlayerController : MonoBehaviour
     {
         anim.SetInteger("State", (int)player_state);
         Debug.Log((int)player_state);
-        if (rigid_body.velocity.x > 0)
+        if (rigid_body.velocity.x > 0.1F)
         {
             sprite_renderer.flipX = false;
         }
-        else if (rigid_body.velocity.x < 0)
+        else if (rigid_body.velocity.x < -0.1F)
         {
             sprite_renderer.flipX = true;
         }
