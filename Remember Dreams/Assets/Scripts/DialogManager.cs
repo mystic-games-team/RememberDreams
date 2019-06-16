@@ -99,18 +99,10 @@ public class DialogManager : MonoBehaviour
                             obj2.GetComponent<Text>().text = dialog_data.actual_node.options[1].option_text;
                             obj2.GetComponent<Button>().onClick.AddListener(delegate { PerformFirstNodePhrase(dialog_data.actual_node.options[1].next_node); }); // per passar parametres
                         }
-                        if (dialog_data.actual_node.options[0].next_node == 0)
-                         {
-                        active = true;
-                        }
-                        if (dialog_data.actual_node.options[1].next_node == 0)
-                        {
-                            active = true;
-                        }
-                    break;
+                        break;
+                    }
                 }
             }
-        }
     }
     public void PerformFirstNodePhrase(int node)
     {
