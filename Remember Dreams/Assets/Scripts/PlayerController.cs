@@ -88,9 +88,10 @@ public class PlayerController : MonoBehaviour
 
     private void GetInput()
     {
-        player_input.jump = Input.GetKey(KeyCode.Space);
+        player_input.jump = Input.GetButton("Jump");
         player_input.move_x = Input.GetAxis("Horizontal");
-        player_input.attack = Input.GetKeyDown(KeyCode.Z);
+        player_input.attack = Input.GetButtonDown("Attack");
+
     }
 
     private void Jump()
