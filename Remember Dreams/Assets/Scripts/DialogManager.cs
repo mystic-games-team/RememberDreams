@@ -20,8 +20,9 @@ public class DialogManager : MonoBehaviour
         public Interactivity.DialogNodes actual_node;
         public GameObject interactive_target;
     }
-
+    [HideInInspector]
     public DialogData dialog_data;
+    [HideInInspector]
     public bool active = false;
     private bool can_pass_dialog = true;
     // Start is called before the first frame update

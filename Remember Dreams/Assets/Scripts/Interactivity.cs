@@ -43,6 +43,7 @@ public class Interactivity : MonoBehaviour
     [SerializeField]
     public List<DialogNodes> dialog_node = new List<DialogNodes>();
 
+    [HideInInspector]
     public DialogNodes actual_node;
 
     // Start is called before the first frame update
