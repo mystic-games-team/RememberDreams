@@ -43,7 +43,7 @@ public class DialogManager : MonoBehaviour
         {
             if (can_pass_dialog)
             {
-                if (Input.GetKeyDown(KeyCode.Space) && !dialog_data.dialog_panel.transform.Find("Option1").gameObject.activeInHierarchy)
+                if (Input.GetButtonDown("Interact") && !dialog_data.dialog_panel.transform.Find("Option1").gameObject.activeInHierarchy)
                 {
                     if (phrase_completed)
                         PerformNextPhrase();

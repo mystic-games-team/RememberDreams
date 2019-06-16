@@ -72,7 +72,7 @@ public class Interactivity : MonoBehaviour
     {
         if (interacting_state == InteractingStates.WAITING_INTERACTION) // player is in range to talk
         {
-            if (Input.GetKeyDown(KeyCode.Space)) // player begins talking
+            if (Input.GetButtonDown("Interact")) // player begins talking
             {
                 interacting_state = InteractingStates.INTERACTING;
                 dialog_panel = Instantiate(copy_panel); // create the prefab of the dialog panel
