@@ -99,6 +99,7 @@ public class PlayerController : MonoBehaviour
         if(player_input.attack)
         {
             player_state = PlayerStates.ATTACK;
+            rigid_body.bodyType = RigidbodyType2D.Static;
         }
     }
 
@@ -152,6 +153,7 @@ public class PlayerController : MonoBehaviour
 
     private void AttackFinished()
     {
+        rigid_body.bodyType = RigidbodyType2D.Dynamic;
         player_state = PlayerStates.IDLE;
     }
     private void JumpFinished()

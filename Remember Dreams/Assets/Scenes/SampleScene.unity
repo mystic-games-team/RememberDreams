@@ -173,7 +173,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cef0042f7cad5724d9098146066afa1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  velocity: 250
+  velocity: 410
   jump_force: 39.98
   player_state: 1
 --- !u!212 &325716834
