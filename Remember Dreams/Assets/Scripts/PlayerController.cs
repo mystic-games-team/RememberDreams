@@ -158,5 +158,9 @@ public class PlayerController : MonoBehaviour
     {
         player_state = PlayerStates.IDLE;
     }
+    private void JumpFinished()
+    {
+        player_state = PlayerStates.AIR;
+    }
 }
 
