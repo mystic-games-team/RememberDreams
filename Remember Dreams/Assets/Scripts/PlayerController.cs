@@ -24,7 +24,7 @@ public class PlayerController : MonoBehaviour
         NONE = -1
     }
 
-
+    public float friction_with_platforms = 0.0F;
     public float velocity = 0.0f;
     public float jump_force = 0.0f;
     public PlayerStates player_state = PlayerStates.NONE; 
@@ -112,7 +112,7 @@ public class PlayerController : MonoBehaviour
     private void HoritzontalMovement()
     {
         Vector2 curVel = rigid_body.velocity;
-        curVel.x = player_input.move_x * velocity;
+        curVel.x = player_input.move_x * velocity * friction_with_platforms;
         rigid_body.velocity = curVel;
     }
 
@@ -130,7 +130,11 @@ public class PlayerController : MonoBehaviour
                 CanJump();
                 Attack();
                 if (player_input.move_x == 0)
+                {
                     player_state = PlayerStates.IDLE;
+                    rigid_body.bodyType = RigidbodyType2D.Static;
+                    rigid_body.bodyType = RigidbodyType2D.Dynamic;
+                }
                 break;
             case PlayerStates.JUMPING:
                 if (!player_input.jump || time_jump_start < Time.realtimeSinceStartup - 0.3F)
@@ -152,6 +156,7 @@ public class PlayerController : MonoBehaviour
     {
         if (player_input.jump)
         {
+            rigid_body.velocity = new Vector2(rigid_body.velocity.x, 0);
             player_state = PlayerStates.JUMPING;
             time_jump_start = Time.realtimeSinceStartup;
         }
