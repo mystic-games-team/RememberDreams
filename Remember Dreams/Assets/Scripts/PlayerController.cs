@@ -59,8 +59,14 @@ public class PlayerController : MonoBehaviour
         }
         GetInput();
         ChangeState();
+        
+    }
+
+    private void FixedUpdate()
+    {
         PerformActions();
     }
+
     private void PerformActions()
     {
         switch (player_state)
@@ -91,7 +97,7 @@ public class PlayerController : MonoBehaviour
 
     private void Jump()
     {
-        rigid_body.AddForce(Vector2.up * jump_force * Time.deltaTime, ForceMode2D.Impulse);
+        rigid_body.AddForce(Vector2.up * jump_force, ForceMode2D.Impulse);
     }
 
     private void Attack()
@@ -106,7 +112,7 @@ public class PlayerController : MonoBehaviour
     private void HoritzontalMovement()
     {
         Vector2 curVel = rigid_body.velocity;
-        curVel.x = player_input.move_x * velocity * Time.deltaTime;
+        curVel.x = player_input.move_x * velocity;
         rigid_body.velocity = curVel;
     }
 
