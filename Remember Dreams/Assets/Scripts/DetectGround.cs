@@ -26,7 +26,7 @@ public class DetectGround : MonoBehaviour
     {
         if (collision.tag == "Ground" && GameObject.Find("Player").GetComponent<PlayerController>().player_state == PlayerController.PlayerStates.RUN)
         {
-            //GameObject.Find("Player").GetComponent<PlayerController>().player_state = PlayerController.PlayerStates.AIR;
+            GameObject.Find("Player").GetComponent<PlayerController>().player_state = PlayerController.PlayerStates.AIR;
         }
     }
 }
