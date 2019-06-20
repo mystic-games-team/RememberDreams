@@ -32,6 +32,7 @@ public class Interactivity : MonoBehaviour
         public bool safe_node;
     }
 
+    public GameObject interacting_anim;
     public GameObject dialog_panel;
     public DialogManager.DialogType dialog_type = DialogManager.DialogType.NONE;
     public InteractingStates interacting_state = InteractingStates.NO_RANGE_TO_INTERACT;
@@ -94,6 +95,11 @@ public class Interactivity : MonoBehaviour
         if (collision.tag == "Player") // player in range now
         {
             interacting_state = InteractingStates.WAITING_INTERACTION;
+            GameObject obj = Instantiate(interacting_anim);
+            obj.transform.position = new Vector3(
+                transform.position.x + GetComponent<SpriteRenderer>().size.x / 2 - obj.GetComponent<SpriteRenderer>().size.x / 2,
+                transform.position.y - 10,
+                transform.position.z);
         }
     }
     public void OnTriggerExit2D(Collider2D collision)
@@ -101,6 +107,7 @@ public class Interactivity : MonoBehaviour
         if (collision.tag == "Player") // player has left the range
         {
             interacting_state = InteractingStates.NO_RANGE_TO_INTERACT;
+            Destroy(GameObject.Find("InteractingAnim(Clone)"));
             if (dialog_panel != null)
                 Destroy(dialog_panel);
         }

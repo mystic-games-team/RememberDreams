@@ -729,6 +729,12 @@ PrefabInstance:
       propertyPath: npc_name
       value: TesNPC
       objectReference: {fileID: 0}
+    - target: {fileID: 9039375392582498107, guid: 1260f7c9c25e64246aaf84867831c388,
+        type: 3}
+      propertyPath: interacting_anim
+      value: 
+      objectReference: {fileID: 936769835151805499, guid: 4bda2e5b0d4d4d347a82cd6ce1686d8d,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1260f7c9c25e64246aaf84867831c388, type: 3}
 --- !u!1 &1087500177
