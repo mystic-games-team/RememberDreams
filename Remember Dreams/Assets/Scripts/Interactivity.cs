@@ -35,7 +35,7 @@ public class Interactivity : MonoBehaviour
     public GameObject dialog_panel;
     public DialogManager.DialogType dialog_type = DialogManager.DialogType.NONE;
     public InteractingStates interacting_state = InteractingStates.NO_RANGE_TO_INTERACT;
-
+    public string npc_name;
     public Sprite portrait_npc;
     private GameObject copy_panel;
     [SerializeField]
@@ -84,6 +84,7 @@ public class Interactivity : MonoBehaviour
                 data.dialog_panel = dialog_panel;
                 data.interactive_target = gameObject;
                 data.portrait_npc = portrait_npc;
+                data.name_npc = npc_name;
                 GameObject.Find("DialogManager").SendMessage("StartDialog", data);
             }
         }

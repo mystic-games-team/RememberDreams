@@ -3,7 +3,10 @@ guid: c44b385ba4263f94886cc887fe0a2cae
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - dialog_panel: {fileID: 4261267213533614340, guid: bdb4ae20001a21d4793abe236d935768,
+      type: 3}
+  - portrait_npc: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

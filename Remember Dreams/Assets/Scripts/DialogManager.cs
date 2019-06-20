@@ -20,7 +20,9 @@ public class DialogManager : MonoBehaviour
         public List<Interactivity.DialogNodes> dialog_node;
         public Interactivity.DialogNodes actual_node;
         public GameObject interactive_target;
+        public string name_npc;
     }
+
     [HideInInspector]
     public DialogData dialog_data;
     [HideInInspector]
@@ -63,11 +65,7 @@ public class DialogManager : MonoBehaviour
     public void StartDialog(DialogData data)
     {
         // set struct
-        dialog_data.dialog_panel = data.dialog_panel;
-        dialog_data.dialog_node = data.dialog_node;
-        dialog_data.portrait_npc = data.portrait_npc;
-        dialog_data.actual_node = data.actual_node;
-        dialog_data.interactive_target = data.interactive_target;
+        dialog_data = data;
 
         // always ui elemtns must have as a parent canvas
         dialog_data.dialog_panel.transform.SetParent(FindObjectOfType<Canvas>().transform, false);
@@ -75,6 +73,9 @@ public class DialogManager : MonoBehaviour
 
         // set the npc portrait image
         dialog_data.dialog_panel.transform.Find("PortraitNPC").GetComponent<Image>().sprite = dialog_data.portrait_npc;
+
+        // set the npc_name
+        dialog_data.dialog_panel.transform.Find("NPCName").GetComponent<Text>().text = dialog_data.name_npc;
 
         // set the first phrase
         //dialog_data.dialog_panel.transform.Find("Text").GetComponent<Text>().text = dialog_data.actual_node.node_text[0];
