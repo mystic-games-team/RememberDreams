@@ -97,9 +97,10 @@ public class Interactivity : MonoBehaviour
             interacting_state = InteractingStates.WAITING_INTERACTION;
             GameObject obj = Instantiate(interacting_anim);
             obj.transform.position = new Vector3(
-                transform.position.x + GetComponent<SpriteRenderer>().size.x / 2 - obj.GetComponent<SpriteRenderer>().size.x / 2,
-                transform.position.y - 10,
+                transform.position.x + GetComponentInParent<SpriteRenderer>().size.x / 2 - obj.GetComponent<SpriteRenderer>().size.x / 2,
+                transform.position.y,
                 transform.position.z);
+            Debug.Log(GetComponentInParent<SpriteRenderer>().size.x);
         }
     }
     public void OnTriggerExit2D(Collider2D collision)
